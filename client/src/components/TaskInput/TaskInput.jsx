@@ -8,6 +8,20 @@ import { AppContext } from '../../context/AppContext'
 
 export const TaskInput = () => {
   const { taskInputValue, handleChangetaskInputValue, handleAddTask } = useContext(AppContext)
+  let taskInput = document.getElementById('task_add_basic')
+
+  taskInput?.addEventListener(
+    'keypress',
+    (e) => {
+      //console.log(e.code)
+      if (e.key === 'Enter') {
+        e.preventDefault()
+        document.getElementById('myBtn').click()
+        // e.stopImmediatePropagation()
+      }
+    },
+    { once: true }
+  )
   return (
     <Box>
       <form method='#' action='#'>
@@ -27,25 +41,26 @@ export const TaskInput = () => {
               width: '100%',
               display: 'flex',
               justifyContent: 'flex-start',
-              mb: '2rem',
-              mt: '2rem',
+              mb: '0.5rem',
+              mt: '3rem',
             }}
           >
             Tasks
           </Typography>
 
           <Button
+            id='myBtn'
             variant='contained'
-            sx={{ height: '3rem', width: '3rem' }}
+            sx={{ height: '2.5rem', width: '2.5rem', mt: '1.5rem' }}
             onClick={handleAddTask}
           >
-            <IoRocketSharp style={{ fontSize: '1.5rem' }} />
+            <IoRocketSharp style={{ fontSize: '1rem' }} />
           </Button>
         </Box>
 
         <TextField
           fullWidth
-          id='standard-basic'
+          id='task_add_basic'
           label='New Task:'
           variant='standard'
           type='string'

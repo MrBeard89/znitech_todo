@@ -13,7 +13,6 @@ export const AppContextProvider = (props) => {
   //Addtask Function
   const handleAddTask = () => {
     if (taskInputValue.length === 0) {
-      alert('Irj egy Feladatott!')
       return false
     }
     const task = {
@@ -21,12 +20,38 @@ export const AppContextProvider = (props) => {
       taskName: taskInputValue,
       completed: false,
     }
+
     setTodoList([...todoList, task])
     setTaskInputValue('')
-    console.log(todoList)
   }
 
-  const contextValue = { taskInputValue, todoList, handleChangetaskInputValue, handleAddTask }
+  //Delete task function
+  const handleDeleteTask = (id) => {
+    const newTodoList = todoList.filter((task) => task.id !== id)
+    setTodoList(newTodoList)
+  }
+
+  //Checkbox "done" toggle
+  const handleDoneTask = (id) => {
+    setTodoList(
+      todoList.map((task) => {
+        if (task.id === id) {
+          return { ...task, completed: true }
+        } else {
+          return task
+        }
+      })
+    )
+  }
+
+  const contextValue = {
+    taskInputValue,
+    todoList,
+    handleChangetaskInputValue,
+    handleAddTask,
+    handleDeleteTask,
+    handleDoneTask,
+  }
 
   return <AppContext.Provider value={contextValue}>{props.children}</AppContext.Provider>
 }
