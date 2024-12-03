@@ -13,7 +13,6 @@ export const TaskInput = () => {
   taskInput?.addEventListener(
     'keypress',
     (e) => {
-      //console.log(e.code)
       if (e.key === 'Enter') {
         e.preventDefault()
         document.getElementById('myBtn').click()

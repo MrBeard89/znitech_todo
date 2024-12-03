@@ -3,9 +3,11 @@ import React, { createContext, useEffect, useState } from 'react'
 export const AppContext = createContext({})
 
 export const AppContextProvider = (props) => {
+  //States
   const [taskInputValue, setTaskInputValue] = useState('')
   const [todoList, setTodoList] = useState([])
 
+  //Input field
   const handleChangetaskInputValue = (e) => {
     setTaskInputValue(e.target.value)
   }
@@ -44,6 +46,7 @@ export const AppContextProvider = (props) => {
     )
   }
 
+  //ContextValues
   const contextValue = {
     taskInputValue,
     todoList,

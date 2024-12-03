@@ -25,7 +25,7 @@ function App() {
         </FormControl>
 
         {/* Tasks Components Section 👇 */}
-        {}
+
         <FormControl fullWidth>
           <Tasks />
         </FormControl>
