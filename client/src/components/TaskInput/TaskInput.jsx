@@ -5,9 +5,10 @@ import Typography from '@mui/material/Typography'
 import { IoRocketSharp } from 'react-icons/io5'
 import { Button } from '@mui/material'
 import { AppContext } from '../../context/AppContext'
+import { useAddTask } from '../../hooks/useAddTask'
 
 export const TaskInput = () => {
-  const { taskInputValue, handleChangetaskInputValue, handleAddTask } = useContext(AppContext)
+  const { taskInputValue, handleChangetaskInputValue } = useContext(AppContext)
   let taskInput = document.getElementById('task_add_basic')
 
   taskInput?.addEventListener(
@@ -21,6 +22,8 @@ export const TaskInput = () => {
     },
     { once: true }
   )
+
+  const AddTask = useAddTask()
   return (
     <Box>
       <form method='#' action='#'>
@@ -51,7 +54,7 @@ export const TaskInput = () => {
             id='myBtn'
             variant='contained'
             sx={{ height: '2.5rem', width: '2.5rem', mt: '1.5rem' }}
-            onClick={handleAddTask}
+            onClick={AddTask}
           >
             <IoRocketSharp style={{ fontSize: '1rem' }} />
           </Button>

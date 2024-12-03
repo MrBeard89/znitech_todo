@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
+import Axios from 'axios'
 
 export const AppContext = createContext({})
 
@@ -7,24 +8,24 @@ export const AppContextProvider = (props) => {
   const [taskInputValue, setTaskInputValue] = useState('')
   const [todoList, setTodoList] = useState([])
 
-  //Input field
-  const handleChangetaskInputValue = (e) => {
-    setTaskInputValue(e.target.value)
+  const Getall = async () => {
+    try {
+      Axios.defaults.baseURL = 'http://localhost:8000/'
+      //Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
+      Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+      const response = await Axios.get('http://localhost:8000/')
+      const dataString = JSON.stringify(response.data)
+      const parsedData = JSON.parse(dataString)
+      setTodoList(parsedData)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  //Addtask Function
-  const handleAddTask = () => {
-    if (taskInputValue.length === 0) {
-      return false
-    }
-    const task = {
-      id: todoList.length === 0 ? +1 : todoList[todoList.length - 1].id + 1,
-      taskName: taskInputValue,
-      completed: false,
-    }
-
-    setTodoList([...todoList, task])
-    setTaskInputValue('')
+  //Input field
+  const handleChangetaskInputValue = (e) => {
+    console.log(e.target.value)
+    setTaskInputValue(e.target.value)
   }
 
   //Delete task function
@@ -46,12 +47,18 @@ export const AppContextProvider = (props) => {
     )
   }
 
+  useEffect(() => {
+    Getall()
+  }, [])
+
   //ContextValues
   const contextValue = {
     taskInputValue,
+    setTaskInputValue,
     todoList,
+    setTodoList,
     handleChangetaskInputValue,
-    handleAddTask,
+    // handleAddTask,
     handleDeleteTask,
     handleDoneTask,
   }
