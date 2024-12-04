@@ -6,7 +6,7 @@ export function useAddTask() {
   const { taskInputValue, todoList, setTodoList, setTaskInputValue } = useContext(AppContext)
   // ****************** Post request ******************* //
   //
-  let RESPONSE_URL = 'http://localhost:8000'
+  let REQUEST_URL = 'http://localhost:8000/addTask'
   let responseState
   let postData
   let task
@@ -29,13 +29,13 @@ export function useAddTask() {
 
   const Req = async () => {
     postData = {
-      id: task.id,
-      taskName: task.taskName,
-      completed: task.completed,
+      id: task?.id,
+      taskName: task?.taskName,
+      completed: task?.completed,
     }
     task === undefined
       ? ''
-      : Axios.post(RESPONSE_URL, postData)
+      : Axios.post(REQUEST_URL, postData)
           .then((response) => {
             const dataString = JSON.stringify(response.data)
             const parsedData = JSON.parse(dataString)

@@ -5,7 +5,8 @@ import Checkbox from '@mui/material/Checkbox'
 import { MdDeleteOutline } from 'react-icons/md'
 
 export const Tasks = () => {
-  const { todoList, handleDeleteTask, handleDoneTask } = useContext(AppContext)
+  const { todoList, handleDoneTask, handleDeleteTask } = useContext(AppContext)
+
   return (
     <>
       {todoList.length == 0 ? (

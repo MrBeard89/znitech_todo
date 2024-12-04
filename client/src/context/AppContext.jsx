@@ -8,12 +8,15 @@ export const AppContextProvider = (props) => {
   const [taskInputValue, setTaskInputValue] = useState('')
   const [todoList, setTodoList] = useState([])
 
+  //URL-s
+  const GET_ALL_URL = 'http://localhost:8000/getAll'
+
   const Getall = async () => {
     try {
-      Axios.defaults.baseURL = 'http://localhost:8000/'
+      Axios.defaults.baseURL = GET_ALL_URL
       //Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
       Axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-      const response = await Axios.get('http://localhost:8000/')
+      const response = await Axios.get(GET_ALL_URL)
       const dataString = JSON.stringify(response.data)
       const parsedData = JSON.parse(dataString)
       setTodoList(parsedData)
@@ -24,29 +27,65 @@ export const AppContextProvider = (props) => {
 
   //Input field
   const handleChangetaskInputValue = (e) => {
-    console.log(e.target.value)
     setTaskInputValue(e.target.value)
   }
 
-  //Delete task function
+  //A törlést igy oldottam meg mert a useHookal valamiért nem sikerült, nem updatelődött a state, igy idő szűkébben,
+  //és mert nem akartam hogy jobban elhúzódjon,igy oldottam meg !
+
+  //Delete Task
   const handleDeleteTask = (id) => {
-    const newTodoList = todoList.filter((task) => task.id !== id)
-    setTodoList(newTodoList)
+    let DELETE_REQUEST_URL = 'http://localhost:8000/deleteTask'
+    let responseState
+    let postData
+
+    const DeleteReq = async () => {
+      postData = {
+        id: id,
+      }
+
+      Axios.post(DELETE_REQUEST_URL, postData)
+        .then((response) => {
+          const dataString = JSON.stringify(response.data)
+          const parsedData = JSON.parse(dataString)
+          setTodoList(parsedData)
+          setTaskInputValue('')
+        })
+        .catch((error) => {
+          console.error(error)
+          return []
+        })
+    }
+    DeleteReq()
   }
 
   //Checkbox "done" toggle
   const handleDoneTask = (id) => {
-    setTodoList(
-      todoList.map((task) => {
-        if (task.id === id) {
-          return { ...task, completed: true }
-        } else {
-          return task
-        }
-      })
-    )
+    let DONE_REQUEST_URL = 'http://localhost:8000/doneTask'
+    let responseState
+    let postData
+
+    const DoneReq = async () => {
+      postData = {
+        id: id,
+      }
+
+      Axios.post(DONE_REQUEST_URL, postData)
+        .then((response) => {
+          const dataString = JSON.stringify(response.data)
+          const parsedData = JSON.parse(dataString)
+          setTodoList(parsedData)
+          setTaskInputValue('')
+        })
+        .catch((error) => {
+          console.error(error)
+          return []
+        })
+    }
+    DoneReq()
   }
 
+  //Init call for get all tasks
   useEffect(() => {
     Getall()
   }, [])
@@ -58,7 +97,6 @@ export const AppContextProvider = (props) => {
     todoList,
     setTodoList,
     handleChangetaskInputValue,
-    // handleAddTask,
     handleDeleteTask,
     handleDoneTask,
   }
