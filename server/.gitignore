@@ -1,2 +1,2 @@
 node_modules
-# .env  Alapesetbe az env fájlban tároljuk a PORT ,API_KEY és egyébb kulcsokat,de az egyszerűség kedvéért most ezt csináltam meg.
+# .env   Alapesetbe az env fájlban tároljuk a PORT ,API_KEY és egyébb kulcsokat,de az egyszerűség kedvéért most ezt csináltam meg.
