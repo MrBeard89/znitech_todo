@@ -36,7 +36,6 @@ export const AppContextProvider = (props) => {
   //Delete Task
   const handleDeleteTask = (id) => {
     let DELETE_REQUEST_URL = 'http://localhost:8000/deleteTask'
-    let responseState
     let postData
 
     const DeleteReq = async () => {
@@ -62,7 +61,6 @@ export const AppContextProvider = (props) => {
   //Checkbox "done" toggle
   const handleDoneTask = (id) => {
     let DONE_REQUEST_URL = 'http://localhost:8000/doneTask'
-    let responseState
     let postData
 
     const DoneReq = async () => {

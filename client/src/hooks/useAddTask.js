@@ -7,7 +7,6 @@ export function useAddTask() {
   // ****************** Post request ******************* //
   //
   let REQUEST_URL = 'http://localhost:8000/addTask'
-  let responseState
   let postData
   let task
 
