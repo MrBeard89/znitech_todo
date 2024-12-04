@@ -14,14 +14,11 @@ function App() {
             display: 'flex',
             gap: '3rem',
             flexDirection: 'column',
-            //alignContent: 'center',
             height: 'fit-content',
             width: '100%',
             maxWidth: '725px',
             pl: '1rem',
             pr: '1rem',
-            //minWidth: '325px',
-            //maxWidth: '100%',
           }}
         >
           {/* Header input Section ✌️ */}

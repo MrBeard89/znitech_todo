@@ -3,6 +3,7 @@ import cors from 'cors'
 
 const app = express()
 
+//cors opciók beállitása
 let allowedOrigins = ['http://localhost:3000', 'http://localhost:5173']
 
 const corsOptions = {
@@ -22,6 +23,7 @@ app.options(allowedOrigins, cors(corsOptions))
 let tasks = []
 
 //********************* Routes ********************* //
+//express.Router-t nem használtam, gondoltam nem baj ha az index.js ben vannak a routeok, mivel kevés van
 
 //Get all
 app.get('/getAll', cors(corsOptions), (req, res) => {

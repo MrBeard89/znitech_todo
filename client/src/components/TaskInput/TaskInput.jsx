@@ -9,6 +9,8 @@ import { useAddTask } from '../../hooks/useAddTask'
 
 export const TaskInput = () => {
   const { taskInputValue, handleChangetaskInputValue } = useContext(AppContext)
+
+  //Enter funkció
   let taskInput = document.getElementById('task_add_basic')
 
   taskInput?.addEventListener(

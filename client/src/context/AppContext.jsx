@@ -10,7 +10,10 @@ export const AppContextProvider = (props) => {
 
   //URL-s
   const GET_ALL_URL = 'http://localhost:8000/getAll'
+  const DELETE_REQUEST_URL = 'http://localhost:8000/deleteTask'
+  const DONE_REQUEST_URL = 'http://localhost:8000/doneTask'
 
+  //Összes feladat
   const Getall = async () => {
     try {
       Axios.defaults.baseURL = GET_ALL_URL
@@ -31,13 +34,11 @@ export const AppContextProvider = (props) => {
   }
 
   //A törlést igy oldottam meg mert a useHookal valamiért nem sikerült, nem updatelődött a state, igy idő szűkébben,
-  //és mert nem akartam hogy jobban elhúzódjon,igy oldottam meg !
+  //és mert nem akartam hogy jobban elhúzódjon !
 
   //Delete Task
   const handleDeleteTask = (id) => {
-    let DELETE_REQUEST_URL = 'http://localhost:8000/deleteTask'
     let postData
-
     const DeleteReq = async () => {
       postData = {
         id: id,
@@ -60,9 +61,7 @@ export const AppContextProvider = (props) => {
 
   //Checkbox "done" toggle
   const handleDoneTask = (id) => {
-    let DONE_REQUEST_URL = 'http://localhost:8000/doneTask'
     let postData
-
     const DoneReq = async () => {
       postData = {
         id: id,
@@ -83,7 +82,7 @@ export const AppContextProvider = (props) => {
     DoneReq()
   }
 
-  //Init call for get all tasks
+  //Init call for get all tasks - csak egyszer fut le, mivel válaszban mindig küldöm az aktuális tömböt, kérésnél
   useEffect(() => {
     Getall()
   }, [])
