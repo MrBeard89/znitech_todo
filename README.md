@@ -19,5 +19,3 @@
 
 - Minden funkció hiba nélkül működik !
 - .env (PORT,API_KEY stb) nem lett létrehozva a feladat egyszerűsége miatt
-
-UI: Csak megjegyzésképpen, de 1-2 órám elment a cors middleware beállitásával + reacton belül 1 state változó szinkronizálásával, ezt bele is irtam kommentben a kódba,adott részhez!
