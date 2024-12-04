@@ -1,8 +1,23 @@
-# React + Vite
+# Todo list funkciók:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Drag n Drop
+- Read,Update,Create,Delete - CRUD Operációk
+- Ideiglenes adatbázis hardcoded egy tömbben Express Szerveren
+- Összes Adatott,Kérést a szerver dolgozza fel
+- Minimális mobile, illetve desktop design
+- Enterre, illetve gombnyomásra is lefut a hozzáadás
 
-Currently, two official plugins are available:
+# Használt technológiák:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React + Vite
+- MUI könyvtár , sx modulal
+- React Context Api
+- React Custom hook
+- Axios - Kérések feldolgozására
+- React Icons könyvtár - Iconok hozzáadására
+- NodeJS + Express keretrendszer
+
+- Minden funkció hiba nélkül működik !
+- .env (PORT,API_KEY stb) nem lett létrehozva a feladat egyszerűsége miatt
+
+UI: Csak megjegyzésképpen, de 1-2 órám elment a cors middleware beállitásával + reacton belül 1 state változó szinkronizálásával, ezt bele is irtam kommentben a kódba,adott részhez!
