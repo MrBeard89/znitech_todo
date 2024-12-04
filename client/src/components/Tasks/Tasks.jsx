@@ -1,12 +1,23 @@
 import { Box, Button, Typography } from '@mui/material'
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { AppContext } from '../../context/AppContext'
 import Checkbox from '@mui/material/Checkbox'
 import { MdDeleteOutline } from 'react-icons/md'
 
 export const Tasks = () => {
-  const { todoList, handleDoneTask, handleDeleteTask } = useContext(AppContext)
+  const { todoList, setTodoList, handleDoneTask, handleDeleteTask } = useContext(AppContext)
 
+  const dragTask = useRef(0)
+  const draggedOverTask = useRef(0)
+
+  //DND funkcionalítáahoz handle function
+  function handleSort() {
+    const todoClone = [...todoList]
+    const temp = todoClone[dragTask.current]
+    todoClone[dragTask.current] = todoClone[draggedOverTask.current]
+    todoClone[draggedOverTask.current] = temp
+    setTodoList(todoClone)
+  }
   return (
     <>
       {todoList.length == 0 ? (
@@ -14,15 +25,21 @@ export const Tasks = () => {
       ) : (
         todoList.map((task, index) => {
           return (
-            <Box
+            <div
+              draggable
               fullWidth
               key={index}
-              sx={{
+              style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                mb: '1.5rem',
+                marginBottom: '1.5rem',
               }}
+              //DND functionality
+              onDragStart={() => (dragTask.current = index)}
+              onDragEnter={() => (draggedOverTask.current = index)}
+              onDragEnd={handleSort}
+              onDragOver={(e) => e.preventDefault()}
             >
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Checkbox
@@ -47,7 +64,7 @@ export const Tasks = () => {
               <Button onClick={() => handleDeleteTask(task.id)}>
                 <MdDeleteOutline style={{ fontSize: '1.5rem' }} />
               </Button>
-            </Box>
+            </div>
           )
         })
       )}
